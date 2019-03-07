@@ -18,6 +18,12 @@
 
     <!-- Styles -->
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
+
+    <style>
+        body { padding-bottom: 100px; }
+        .level { display: flex; align-items: center; }
+        .flex { flex: 1; }
+    </style>
 </head>
 <body>
     <div id="app">
