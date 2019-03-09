@@ -23,6 +23,7 @@ Route::get('/threads/{channel}', 'ThreadsController@index');
 Route::delete('/threads/{channel}/{thread}', 'ThreadsController@destroy');
 
 Route::post('/replies/{reply}/favorites', 'FavoritesController@store');
+Route::delete('/replies/{reply}/favorites', 'FavoritesController@destroy');
 
 Route::post('/threads/{channel}/{thread}/replies', 'RepliesController@store');
 Route::patch('/replies/{reply}', 'RepliesController@update');
