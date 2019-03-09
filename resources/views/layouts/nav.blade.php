@@ -10,15 +10,29 @@
                 <div class="collapse navbar-collapse" id="navbarSupportedContent">
                     <!-- Left Side Of Navbar -->
                     <ul class="navbar-nav mr-auto">
-                        <li class="nav-item">
-                            <a class="nav-link" href="/threads">All Threads</a>
-                        </li>
 
-                        @if (auth()->check())
-                            <li class="nav-item">
-                                <a class="nav-link" href="/threads?by={{ auth()->user()->name }}">My Threads</a>
-                            </li>
-                        @endif
+                        
+
+
+
+                        <div class="dropdown">
+                            <a class="btn btn-secondary dropdown-toggle" href="#" role="button" id="dropdownMenuLink"
+                                data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                Browse
+                            </a>
+                            <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                                <a class="dropdown-item" href="/threads">All Threads</a>
+
+                                @if (auth()->check())
+                                    <a class="dropdown-item" href="/threads?by={{ auth()->user()->name }}">My Threads</a>
+                                @endif
+
+                                <a href="/threads?popular=1" class="dropdown-item">Popular Threads</a>
+                                <a href="/threads?unanswered=1" class="dropdown-item">Unanswered Threads</a>
+                            </div>
+                        </div>
+
+
 
                         <li class="nav-item">
                             <a class="nav-link" href="/threads/create">New Thread</a>
