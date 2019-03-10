@@ -116,4 +116,19 @@ class ParticipateInThreadsTest extends TestCase
         $this->post($thread->path() . '/replies', $reply->toArray())
             ->assertStatus(422);
     }
+
+    /** @test */
+    function users_may_only_reply_maximum_of_once_per_minute()
+    {
+        $this->signIn();
+
+        $thread = create('App\Thread');
+        $reply = make('App\Reply');
+
+        $this->post($thread->path() . '/replies', $reply->toArray())
+            ->assertStatus(201);
+
+        $this->post($thread->path() . '/replies', $reply->toArray())
+            ->assertStatus(429);
+    }
 }
