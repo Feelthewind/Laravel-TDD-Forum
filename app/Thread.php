@@ -43,6 +43,13 @@ class Thread extends Model
         return $reply;
     }
 
+    public function hasUpdatesFor($user)
+    {
+        $key = $user->visitedThreadCacheKey($this);
+
+        return $this->updated_at > cache($key);
+    }
+
     public function creator()
     {
         return $this->belongsTo(User::class, 'user_id');
