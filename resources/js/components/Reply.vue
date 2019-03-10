@@ -40,7 +40,7 @@
 
       <div
         v-else
-        v-text="body"
+        v-html="body"
       ></div>
     </div>
 
