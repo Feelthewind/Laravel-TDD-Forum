@@ -133,6 +133,6 @@ class ThreadsController extends Controller
             $threads = $channel->threads()->latest();
         }
 
-        return $threads->get();
+        return $threads->paginate(25);
     }
 }
