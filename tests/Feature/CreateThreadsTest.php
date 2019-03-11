@@ -106,7 +106,21 @@ class CreateThreadsTest extends TestCase
         $this->assertEquals(0, Activity::count());
     }
 
-    protected function publishThread($overrides)
+    /** @test */
+    function new_users_must_first_confirm_their_email_address_before_creating_threads()
+    {
+        $user = factory('App\User')->states('unconfirmed')->create();
+
+        $this->signIn($user);
+
+        $thread = make('App\Thread');
+
+        $this->post(route('threads'), $thread->toArray())
+            ->assertRedirect(route('threads'))
+            ->assertSessionHas('flash', 'You must first confirm your email address.');
+    }
+
+    protected function publishThread($overrides = [])
     {
         $this->withExceptionHandling()->signIn();
 
