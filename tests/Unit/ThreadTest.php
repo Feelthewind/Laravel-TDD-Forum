@@ -52,12 +52,12 @@ class ThreadTest extends TestCase
     }
 
     /** @test */
-    function a_thread_can_make_a_path()
+    function a_thread_has_a_path()
     {
         $thread = create('App\Thread');
 
         $this->assertEquals(
-            "/threads/{$thread->channel->slug}/{$thread->id}",
+            "/threads/{$thread->channel->slug}/{$thread->slug}",
             $thread->path()
         );
     }
