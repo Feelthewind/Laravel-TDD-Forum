@@ -42,6 +42,8 @@ Route::get('api/users', 'Api\UsersController@index');
 
 Route::post('api/users/{user}/avatar', 'Api\UserAvatarController@store')->middleware('auth');
 
+Route::get('/register/confirm', 'Auth\RegisterConfirmationController@index')->name('register.confirm');
+
 Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
