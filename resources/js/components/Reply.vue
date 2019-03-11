@@ -46,7 +46,7 @@
     </div>
 
     <div class="panel-footer level">
-      <div v-if="authorize('updateReply', reply)">
+      <div v-if="authorize('owns', reply) || authorize('owns', reply.thread)">
         <button
           class="btn btn-xs mr-1"
           @click="editing = true"
@@ -60,7 +60,7 @@
       <button
         class="btn btn-xs btn-default ml-a"
         @click="markBestReply"
-        v-show="! isBest"
+        v-if="authorize('owns', reply.thread)"
       >Best Reply?</button>
     </div>
   </div>

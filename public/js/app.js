@@ -57858,7 +57858,8 @@ var render = function() {
       ]),
       _vm._v(" "),
       _c("div", { staticClass: "panel-footer level" }, [
-        _vm.authorize("updateReply", _vm.reply)
+        _vm.authorize("owns", _vm.reply) ||
+        _vm.authorize("owns", _vm.reply.thread)
           ? _c("div", [
               _c(
                 "button",
@@ -57884,22 +57885,16 @@ var render = function() {
             ])
           : _vm._e(),
         _vm._v(" "),
-        _c(
-          "button",
-          {
-            directives: [
+        _vm.authorize("owns", _vm.reply.thread)
+          ? _c(
+              "button",
               {
-                name: "show",
-                rawName: "v-show",
-                value: !_vm.isBest,
-                expression: "! isBest"
-              }
-            ],
-            staticClass: "btn btn-xs btn-default ml-a",
-            on: { click: _vm.markBestReply }
-          },
-          [_vm._v("Best Reply?")]
-        )
+                staticClass: "btn btn-xs btn-default ml-a",
+                on: { click: _vm.markBestReply }
+              },
+              [_vm._v("Best Reply?")]
+            )
+          : _vm._e()
       ])
     ]
   )
@@ -70172,8 +70167,9 @@ var app = new Vue({
 
 var user = window.App.user;
 module.exports = {
-  updateReply: function updateReply(reply) {
-    return reply.user_id === user.id;
+  owns: function owns(model) {
+    var prop = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : 'user_id';
+    return model[prop] === user.id;
   }
 };
 
